@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Cakephp-sorting by CakePHP-Script</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Cakephp-sorting</h1>
+        <h2></h2>
+        <a href="https://github.com/CakePHP-Script/CakePHP-sorting" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="cakephp-sorting" class="anchor" href="#cakephp-sorting" aria-hidden="true"><span class="octicon octicon-link"></span></a>CakePHP-sorting</h1>
+
+<h4>
+<a id="viewusersindexctp" class="anchor" href="#viewusersindexctp" aria-hidden="true"><span class="octicon octicon-link"></span></a>View/Users/index.ctp</h4>
+
+<div class="highlight highlight-html"><pre><span class="pl-s1">&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>&lt;?php echo HTTP_ROOT.'js/jquery-1.7.2.min.js';?&gt;<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">&lt;<span class="pl-ent">script</span>&gt;    </span>
+<span class="pl-s1">$(<span class="pl-c1">document</span>).ready(<span class="pl-k">function</span>()</span>
+<span class="pl-s1">    {</span>
+<span class="pl-s1">        $(<span class="pl-s"><span class="pl-pds">"</span>#test-list<span class="pl-pds">"</span></span>).sortable({</span>
+<span class="pl-s1">          handle <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.handle_left<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">          <span class="pl-en">update</span> <span class="pl-k">:</span> <span class="pl-k">function</span> () {</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">                <span class="pl-k">var</span> order <span class="pl-k">=</span> $(<span class="pl-s"><span class="pl-pds">'</span>#test-list<span class="pl-pds">'</span></span>).sortable(<span class="pl-s"><span class="pl-pds">'</span>serialize<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">            $.post(<span class="pl-s"><span class="pl-pds">"</span>users/sorting<span class="pl-pds">"</span></span>, order, <span class="pl-k">function</span>(<span class="pl-smi">theResponse</span>){</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">            });     </span>
+<span class="pl-s1"></span>
+<span class="pl-s1">          }</span>
+<span class="pl-s1">        });</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1"> &lt;/<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1"> &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>&lt;?php echo HTTP_ROOT.'js/jquery-ui-1.8.21.custom.min.js';?&gt;<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+<p>N.B - <code>HTTP_ROOT</code> i have defined Config/boatstrap.php file. </p>
+
+<pre><code>define('HTTP_ROOT','your_site_path');
+</code></pre>
+
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">tbody</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>test-list<span class="pl-pds">"</span></span>&gt;
+  &lt;?php foreach($getUser as $user){?&gt;
+  &lt;<span class="pl-ent">tr</span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>listItem_&lt;?php echo $user['User']['id'];?&gt;<span class="pl-pds">"</span></span>&gt;
+     &lt;<span class="pl-ent">td</span>&gt;&lt;<span class="pl-ent">span</span> <span class="pl-e">style</span>=<span class="pl-s"><span class="pl-pds">"</span>cursor:move;<span class="pl-pds">"</span></span>&gt;&lt;<span class="pl-ent">img</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>img/arrow.png<span class="pl-pds">"</span></span> <span class="pl-e">alt</span>=<span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> /&gt;&lt;/<span class="pl-ent">span</span>&gt;&lt;/<span class="pl-ent">td</span>&gt;
+     &lt;<span class="pl-ent">td</span>&gt;&lt;?php echo $user['User']['username'];?&gt;&lt;/<span class="pl-ent">td</span>&gt;
+  &lt;/<span class="pl-ent">tr</span>&gt;
+  &lt;?php }?&gt;
+&lt;<span class="pl-ent">tbody</span>&gt;</pre></div>
+
+<h4>
+<a id="controller" class="anchor" href="#controller" aria-hidden="true"><span class="octicon octicon-link"></span></a>Controller</h4>
+
+<pre><code>public function index() {
+    $condition=array('order' =&gt; array('User.sl_no ASC'));
+    $this-&gt;set('getUser', $this-&gt;User-&gt;find('all',$condition));
+}
+
+public function sorting() {
+    $this-&gt;layout = 'ajax';         
+    $array = $_REQUEST['listItem'];
+      $count = 1;
+      foreach ($array as $idval) {            
+          $this-&gt;User-&gt;updateAll(array('sl_no' =&gt; $count), array('User.id' =&gt; $idval)); 
+          $count ++; 
+      } 
+    exit;
+}
+</code></pre>
+
+<h4>
+<a id="image" class="anchor" href="#image" aria-hidden="true"><span class="octicon octicon-link"></span></a>Image</h4>
+
+<p><img src="https://raw.githubusercontent.com/CakePHP-Script/CakePHP-sorting/master/webroot/img/arrow.png" alt="image1"></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/CakePHP-Script/CakePHP-sorting/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/CakePHP-Script/CakePHP-sorting/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/CakePHP-Script/CakePHP-sorting"></a> is maintained by <a href="https://github.com/CakePHP-Script">CakePHP-Script</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
